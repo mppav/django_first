@@ -34,11 +34,13 @@ DEV_APPS = [
 ]
 
 THERD_APPS = [
-
+    'rosetta',
 ]
 
 
 INSTALLED_APPS = [
+    "modeltranslation",
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +52,9 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+    'django.middleware.locale.LocaleMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -119,6 +124,18 @@ USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGES = [
+    ('en', 'English'),
+    ('uk', 'Українська'),
+    ('fr', "Fran"),
+]
+
+LOCALE_PATHS = [BASE_DIR / 'locale']
+
+ROSETTA_SHOW_AT_ADMIN_PANEL = True
+
+
+# MODELTRANSLATION_LANGUAGES = ('en', 'de')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
