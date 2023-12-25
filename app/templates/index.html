@@ -1,32 +1,27 @@
+{% extends 'base.html' %}
 {% load i18n %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home page</title>
-</head>
-<body>
 
-<form action="{% url 'set_language' %}" method="post">
-  {% csrf_token %}
-        <input name="next" type="hidden" value="{{ request.get_full_path|slice:"3:" }}">
-        <select class="form-select" name="language" onchange="this.form.submit()" id="language">
-          {% get_current_language as LANGUAGE_CODE %}
-          {% get_available_languages as LANGUAGES %}
-          {% get_language_info_list for LANGUAGES as languages %}
-          {% for language in languages %}
-            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
-              {{ language.name_local }} ({{ language.code }})
-            </option>
-          {% endfor %}
-        </select>
-        <label for="language">{% translate "Language" %}</label>
+{%block title%}Home page{% endblock title%}
+
+{% block content %}
+
+<form method="GET">
+    <input type="text" name="q">
+    <input type="submit">
 </form>
 
-<h1>{% translate "Hello World" %}</h1>
+<form method="GET">
+<!--    <input type="text" name="q">-->
+    {{ form.as_p }}
+    <input type="submit">
+</form>
 
 
-<p>{{ data }}</p>
-<p>{{ asd }}</p>
-</body>
-</html>
+
+<h2>Posts</h2>
+{% for post in posts %}
+<h3>{{ post.title }}</h3>
+<p>{{ post.update_at }}</p>
+<p>{{ post.category.title }}</p>
+{% endfor %}
+{% endblock content%}

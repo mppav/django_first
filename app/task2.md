@@ -80,6 +80,18 @@ path('category/<int:pk>/' , category , name='category'),
 
 <а href="category/{{ category.pk }}/"> - <a href="{% url 'category' category.pk %}">
 
+## Html форми
+
+<form action="" method="get" class="form-example">
+  <div class="form-example">
+    <label for="name">Search: </label>
+    <input type="text" name="q" id="search" required />
+  </div>
+<div class="form-example">
+    <input type="submit" value="Search" />
+  </div>
+</form>
+
 ## Модельні форми
 
 from django.forms import ModelForm
@@ -103,3 +115,39 @@ class PostForm (ModelForm) :
 {% include "menu.html" %}
 
 
+urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+STATIC_ROOT = BASE_DIR / 'staticfiles' 
+STATIC_URL = '/static/'
+
+# Forms
+
+my_form.cleaned_data['field']
+
+response: GET, POST, FILES, method, scheme, path, path_info, content_type, content_params, МЕТА, body, resolver_match
+
+HttpResponseRedirect
+
+my_form(initial={"title": "Post title"})
+my_form(instance=...)
+
+
+# Models
+
+## Загальні параметри для всіх типів полів
+verbose_name
+help_text
+default
+unique
+unique_for_date
+unique_for_month
+unique_for_year
+null
+blank
+db_index
+editable
+db_column
+
+## Типи полів
+ 
+CharField

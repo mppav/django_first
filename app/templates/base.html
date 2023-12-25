@@ -1,0 +1,20 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}{% endblock title%}</title>
+</head>
+<body>
+{% include 'locales.html' %}
+<!--menu-->
+{% include 'menu.html' %}
+<!--end menu-->
+<!--content-->
+{% block content %}
+
+{% endblock content%}
+<!--end content-->
+<p>{{ data }}</p>
+</body>
+</html>

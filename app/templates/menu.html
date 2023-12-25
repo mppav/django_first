@@ -1,0 +1,5 @@
+{% load i18n %}
+<a href="{% url 'index' %}"><p>Home page</p></a>
+{% for category in categories %}
+<a href="{% url 'by_category' category.pk %}"><p>{{ category.title }}</p></a>
+{% endfor %}
