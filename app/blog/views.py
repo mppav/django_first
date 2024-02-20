@@ -2,9 +2,41 @@ from django.shortcuts import render, get_object_or_404
 from datetime import datetime
 from django.utils.translation import gettext as _
 from django.http import HttpResponse, HttpResponseRedirect
+from django.views.generic import TemplateView, ListView, DetailView, CreateView
+
 from .models import Category, Post
 from .forms import SearchForm, SimplePostForm, PostForm
 
+class MenuMixin:
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories"] = Category.objects.all()
+        return context
+
+
+class Index(MenuMixin, TemplateView):
+    template_name = "index_cbv.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(Index, self).get_context_data(**kwargs)
+        posts = Post.objects.all()
+        context["posts"] = posts
+        return context
+
+class PostList(MenuMixin, ListView):
+    model = Post
+    paginate_by = 2
+
+class PostDetail(MenuMixin, DetailView):
+    model = Post
+    template_name = "blog/post_detail.html"
+
+
+class PostCreateView(MenuMixin, CreateView):
+    model = Post
+    fields = ['title', 'content', 'category']
+    success_url = "/"
 
 def index(request):
     # return HttpResponse("<h1>Hello</h1>")
@@ -28,6 +60,9 @@ def index(request):
     }
 
     return render(request, "index.html", context)
+
+
+
 
 
 def by_category(request, **kwargs):

@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-from blog.views import index, by_category, post_add, post_save, post_create
+from blog.views import index, by_category, post_add, post_save, post_create, Index, PostList, PostDetail, PostCreateView
 from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
 
@@ -29,11 +29,19 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path("", index, name="index"),
+    # CBV
+
+    path("cbv/", Index.as_view(), name="index_cbv"),
+    path("postlist/", PostList.as_view(), name="post-list"),
+    path("post/<int:pk>/", PostDetail.as_view(), name="post-detail"),
+    path("post/create/", PostCreateView.as_view(), name="post-create"),
+
+    #end CBV
 
     path("post/add/", post_add, name="post_add"),
     path("post/save/", post_save, name="post_save"),
 
-    path("post/create/", post_create, name="post_create"),
+    # path("post/create/", post_create, name="post_create"),
 
     path("category/<int:pk>/", by_category, name="by_category"),
     path('admin/', admin.site.urls),

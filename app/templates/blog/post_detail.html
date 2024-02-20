@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{%block title%}Home page{% endblock title%}
+
+{% block content %}
+
+<h3>{{ object.title }}</h3>
+<p>{{ post.content}}</p>
+<p>{{ post.update_at }}</p>
+<p>{{ post.category.title }}</p>
+
+<p>{{ user }}, {{ user.email }}</p>
+
+{% endblock content%}

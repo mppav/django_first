@@ -124,12 +124,59 @@ STATIC_URL = '/static/'
 
 my_form.cleaned_data['field']
 
-response: GET, POST, FILES, method, scheme, path, path_info, content_type, content_params, МЕТА, body, resolver_match
-
-HttpResponseRedirect
-
 my_form(initial={"title": "Post title"})
 my_form(instance=...)
+
+# Function View
+
+* HttpResponse
+    from django.template.loader import get_template
+    template = get_template()
+    template.render(context=, request=)
+    
+    TemplateResponse - відклажений рендеринг шаблону
+    
+* HttpResponseRedirect
+* HttpResponsePermanentRedirect
+
+* HttpResponseNotFound
+
+response: GET, POST, FILES, method, scheme, path, path_info, content_type, content_params, МЕТА, body, resolver_match
+
+## Петертворення імен юрл
+
+* reverse
+* reverse_lazy
+
+# CBV
+
+<https://ccbv.co.uk/>
+
+* django.views.generic.base
+    * View
+    * ContextMixin
+    * TemplateResponseMixin
+    * TemplateView (all in one)
+* django.views.generic.detail
+    * SingleObjectMixin
+    * SingleObjectTemplateResponseMixin
+    * DetailView
+* django.views.generic.list
+    * MultipleObjectMixin
+    * MultipleObjectTemplateResponseMixin
+    * ListView
+* django.views.generic.edit
+    * FormMixin
+    * ProcessFormView
+    * FormView
+    
+    * ModelFormMixin
+    * CreateView
+    * UpdateView
+    * DeletionMixin
+    * DeleteView
+* RedirectView
+
 
 
 # Models
