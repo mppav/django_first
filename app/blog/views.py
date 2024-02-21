@@ -4,8 +4,12 @@ from django.utils.translation import gettext as _
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 
+from django.contrib.auth.views import LogoutView
+
 from .models import Category, Post
 from .forms import SearchForm, SimplePostForm, PostForm
+
+
 
 class MenuMixin:
 
@@ -13,6 +17,9 @@ class MenuMixin:
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all()
         return context
+
+class BlogLogoutView(MenuMixin, LogoutView):
+    template_name = 'registration/logout.html'
 
 
 class Index(MenuMixin, TemplateView):

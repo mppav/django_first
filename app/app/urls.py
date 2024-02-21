@@ -14,12 +14,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import path, include, re_path
-from blog.views import index, by_category, post_add, post_save, post_create, Index, PostList, PostDetail, PostCreateView
-from django.conf.urls.i18n import i18n_patterns
-from django.conf import settings
 
+from blog.views import (index, by_category, post_add, post_save, Index, PostList, PostDetail, PostCreateView, BlogLogoutView)
 
 urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
@@ -36,7 +36,7 @@ urlpatterns += i18n_patterns(
     path("post/<int:pk>/", PostDetail.as_view(), name="post-detail"),
     path("post/create/", PostCreateView.as_view(), name="post-create"),
 
-    #end CBV
+    # end CBV
 
     path("post/add/", post_add, name="post_add"),
     path("post/save/", post_save, name="post_save"),
@@ -45,6 +45,8 @@ urlpatterns += i18n_patterns(
 
     path("category/<int:pk>/", by_category, name="by_category"),
     path('admin/', admin.site.urls),
+    path('accounts/logout1/', BlogLogoutView.as_view(), name='blog_logout'),
+    path('accounts/', include('django.contrib.auth.urls')),
 )
 
 if 'rosetta' in settings.INSTALLED_APPS:
