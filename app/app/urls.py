@@ -19,6 +19,7 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import path, include, re_path
 
+
 from blog.views import (index, by_category, post_add, post_save, Index, PostList, PostDetail, PostCreateView, BlogLogoutView)
 
 urlpatterns = [
